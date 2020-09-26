@@ -2,6 +2,16 @@
 
 
 
+## Structure
+
+![](/Images/Notes/Structure.png)
+
+## Home
+
+### UI Structure
+
+
+
 // UI Flow of each page
 
 - Home

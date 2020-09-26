@@ -1,13 +1,13 @@
 # Tiktok Clone
-iOS Tiktok Clone built with **Swift(Frontend) **and **Firebase(Backend) **
+iOS Tiktok Clone built with **Swift(Frontend)** and **Firebase(Backend)**
 
 Tiktok Clone contains Chinese Tiktok version and U.S. Tiktok version.
 
 TikTok, known in China as Douyin, is a video-sharing social networking service owned by ByteDance, a Beijing-based Internet technology company founded in 2012 by Zhang Yiming. (From Wikipedia)
 
-## Documentation
+# Documentation
 
-- [Development Notes](/Documentation/Notes.md)
+- [**Development Notes**](/Documentation/Notes.md)
 
 # Preview
 
@@ -29,7 +29,7 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 ## Other Projects
 
 - [Instagram Clone](https://github.com/dks333/KDInstagram)
-- [Mobile Development Journey](https://github.com/dks333/Study-Mobile-Development)
+- [My Mobile Development Journey](https://github.com/dks333/Study-Mobile-Development)
 
 ## About Author
 
