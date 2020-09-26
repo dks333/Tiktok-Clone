@@ -7,7 +7,8 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 
 # Documentation
 
-- [**Development Notes**](/Documentation/Notes.md)
+- [**Detailed Development Notes**](/Documentation/Notes.md)
+- [Updates](/Documentation/Updates.md)
 
 # Preview
 

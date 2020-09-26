@@ -1,7 +1,5 @@
 # TikTok Clone
 
-
-
 ## Structure
 
 <p align="center">
@@ -101,17 +99,46 @@ I am using MVVM with RxSwift in this module. The ViewModel manages all logic in 
 
 ### UI Structure
 
-- Profile
-  - Collection View Flow Layout
-  - Stretchy Header
+<p align="center">
+  <img src="/Images/Notes/ProfileUI.png" />
+</p>
+
+`ProfileViewController` is presented by a collection view with customized collection view flow layout ([**ProfileCollectionViewFlowLayout**](https://github.com/dks333/Tiktok-Clone/blob/78a2bd517b838f93a2be6596424c726e2bc30b50/KD%20Tiktok-Clone/KD%20Tiktok-Clone/Modules/Profile/ProfileCollectionViewFlowLayout.swift#L12)). When the slidebar reaches the status bar, the collection view holds its frame and the ProfileHeaderView's frame, in order to make them "stick" on the top of the screen.
+
+#### Stretchy Header
+
+I used `UIScrollViewDelegate` to acquire the `contentOffset.y` of the collection view and then use this variable to manipulate the `CGAffineTransform`(scaleX:, y:) of the `profileBackgroundImgView`.
+
+```swift
+func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    /// Y offsets of the scroll view
+    let offsetY = scrollView.contentOffset.y
+    if offsetY < 0 {
+        stretchProfileBackgroundWhenScroll(offsetY: offsetY)
+    } else {
+        profileBackgroundImgView.transform = CGAffineTransform(translationX: 0, y: -offsetY)
+    }
+
+}
+
+// Stretch Profile Background Image when scroll up
+func stretchProfileBackgroundWhenScroll(offsetY: CGFloat)  {
+    let scaleRatio: CGFloat = abs(offsetY)/500.0
+    let scaledHeight: CGFloat = scaleRatio * profileBackgroundImgView.frame.height
+    profileBackgroundImgView.transform = CGAffineTransform.init(scaleX: scaleRatio + 1.0, y: scaleRatio + 1.0).concatenating(CGAffineTransform.init(translationX: 0, y: scaledHeight))
+}
+```
 
 
 
+### Clear Cache
+
+By tapping on the `Trash` icon, we can clear all data in the memory cache and the disk cache.
 
 
-// Transition Animation between views
 
-// Firebase Database Design (NoSQL Database)
+## Database
 
-- User, Post, Comment, Video
+- Using Firebase Cloud Firestore to store basic information
+- Using Firebase Storage to store videos
 
