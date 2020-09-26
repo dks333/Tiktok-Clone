@@ -11,19 +11,11 @@ I built this Tiktok Clone that contains Chinese Tiktok versions and U.S. Tiktok 
 
 ## Home
 
-<img src="/Images/HomeVideo.gif" width="298" height="645">
-
-<img src="/Images/CommentVideo.gif" width="298" height="645">
-
-<img src="/Images/LikeVideo.gif" width="298" height="645">
-
-<img src="/Images/PauseVideo.gif" width="298" height="645">
+<img src="/Images/HomeVideo.gif" width="186" height="403"><img src="/Images/CommentVideo.gif" width="186" height="403"><img src="/Images/LikeVideo.gif" width="186" height="403"><img src="/Images/PauseVideo.gif" width="186" height="403">
 
 ## Profile
 
-<img src="/Images/ProfileVideo.gif" width="298" height="645">
-
-<img src="/Images/CacheVideo.gif" width="298" height="645">
+<img src="/Images/ProfileVideo.gif" width="186" height="403"><img src="/Images/CacheVideo.gif" width="186" height="403">
 
 # Third Party Libraries
 
