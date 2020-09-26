@@ -6,6 +6,10 @@
 
 ![](/Images/Notes/Structure.png)
 
+<p align="center">
+  <img src="/Images/Notes/Structure.png" />
+</p>
+
 ## Home
 
 ### UI Structure
