@@ -1,7 +1,7 @@
 # Tiktok Clone
 An iOS Tiktok Clone built with Swift(Frontend) and Firebase(Backend)
 
-I built this Tiktok Clone that contains Chinese Tiktok versions and U.S. Tiktok version.
+Tiktok Clone contains Chinese Tiktok version and U.S. Tiktok version.
 
 # Documentation
 
@@ -11,11 +11,11 @@ I built this Tiktok Clone that contains Chinese Tiktok versions and U.S. Tiktok 
 
 ## Home
 
-<img src="/Images/HomeVideo.gif" width="186" height="403"><img src="/Images/CommentVideo.gif" width="186" height="403"><img src="/Images/LikeVideo.gif" width="186" height="403"><img src="/Images/PauseVideo.gif" width="186" height="403">
+<img src="/Images/HomeVideo.gif" width="186" height="403">&nbsp; <img src="/Images/CommentVideo.gif" width="186" height="403">&nbsp; <img src="/Images/LikeVideo.gif" width="186" height="403">&nbsp; <img src="/Images/PauseVideo.gif" width="186" height="403">
 
 ## Profile
 
-<img src="/Images/ProfileVideo.gif" width="186" height="403"><img src="/Images/CacheVideo.gif" width="186" height="403">
+<img src="/Images/ProfileVideo.gif" width="186" height="403">&nbsp; <img src="/Images/CacheVideo.gif" width="186" height="403">
 
 # Third Party Libraries
 
