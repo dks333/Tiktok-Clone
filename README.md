@@ -1,7 +1,9 @@
 # Tiktok Clone
-An iOS Tiktok Clone built with Swift(Frontend) and Firebase(Backend)
+iOS Tiktok Clone built with **Swift(Frontend) **and **Firebase(Backend) **
 
 Tiktok Clone contains Chinese Tiktok version and U.S. Tiktok version.
+
+TikTok, known in China as Douyin, is a video-sharing social networking service owned by ByteDance, a Beijing-based Internet technology company founded in 2012 by Zhang Yiming. (From Wikipedia)
 
 # Documentation
 
@@ -11,11 +13,11 @@ Tiktok Clone contains Chinese Tiktok version and U.S. Tiktok version.
 
 ## Home
 
-<img src="/Images/HomeVideo.gif" width="186" height="403">&nbsp; <img src="/Images/CommentVideo.gif" width="186" height="403">&nbsp; <img src="/Images/LikeVideo.gif" width="186" height="403">&nbsp; <img src="/Images/PauseVideo.gif" width="186" height="403">
+<img src="/Images/HomeVideo.gif" width="223" height="483">&nbsp; <img src="/Images/CommentVideo.gif" width="223" height="483">&nbsp; <img src="/Images/LikeVideo.gif" width="223" height="483">&nbsp; <img src="/Images/PauseVideo.gif" width="223" height="483">
 
 ## Profile
 
-<img src="/Images/ProfileVideo.gif" width="186" height="403">&nbsp; <img src="/Images/CacheVideo.gif" width="186" height="403">
+<img src="/Images/ProfileVideo.gif" width="223" height="483">&nbsp; <img src="/Images/CacheVideo.gif" width="223" height="483">
 
 # Third Party Libraries
 
