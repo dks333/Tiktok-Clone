@@ -1,0 +1,725 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		180705E9250801130096A4A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180705E8250801130096A4A5 /* AppDelegate.swift */; };
+		180705EB250801130096A4A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180705EA250801130096A4A5 /* SceneDelegate.swift */; };
+		180705ED250801130096A4A5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180705EC250801130096A4A5 /* HomeViewController.swift */; };
+		180705EF250801130096A4A5 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180705EE250801130096A4A5 /* DiscoverViewController.swift */; };
+		180705F4250801160096A4A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 180705F3250801160096A4A5 /* Assets.xcassets */; };
+		180705F7250801160096A4A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 180705F5250801160096A4A5 /* LaunchScreen.storyboard */; };
+		180705FF250802410096A4A5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180705FE250802410096A4A5 /* TabBarController.swift */; };
+		18070601250802AA0096A4A5 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18070600250802AA0096A4A5 /* MediaViewController.swift */; };
+		18070603250802BB0096A4A5 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18070602250802BB0096A4A5 /* InboxViewController.swift */; };
+		18070605250802C60096A4A5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18070604250802C60096A4A5 /* ProfileViewController.swift */; };
+		1807060F250825F90096A4A5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807060E250825F90096A4A5 /* HomeViewModel.swift */; };
+		1807061225082DE40096A4A5 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807061025082DE40096A4A5 /* HomeTableViewCell.swift */; };
+		1807061325082DE40096A4A5 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807061125082DE40096A4A5 /* HomeTableViewCell.xib */; };
+		18070616250832040096A4A5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18070615250832040096A4A5 /* Post.swift */; };
+		18070618250847030096A4A5 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18070617250847030096A4A5 /* Number.swift */; };
+		1807061A2508BB820096A4A5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180706192508BB820096A4A5 /* GoogleService-Info.plist */; };
+		1807061F250986760096A4A5 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807061E250986750096A4A5 /* VideoCacheManager.swift */; };
+		180D0361250F4E4500009875 /* UIKit Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180D0360250F4E4400009875 /* UIKit Extensions.swift */; };
+		180D0363250F4EFA00009875 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180D0362250F4EFA00009875 /* ProfileHeaderView.swift */; };
+		180D0365250F501400009875 /* ProfileSlideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180D0364250F501400009875 /* ProfileSlideBarView.swift */; };
+		180D0367250F502E00009875 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180D0366250F502E00009875 /* ProfileHeaderView.xib */; };
+		180D0369250F512900009875 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180D0368250F512900009875 /* ProfileCollectionViewCell.swift */; };
+		182E8C10251D363B006FEC65 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182E8C0F251D363B006FEC65 /* URL.swift */; };
+		182E8C14251E909C006FEC65 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182E8C13251E909C006FEC65 /* BaseNavigationController.swift */; };
+		1861F6BD250AB38E00AEBF3D /* CommentPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861F6BC250AB38E00AEBF3D /* CommentPopUpView.swift */; };
+		1861F6C6250AD05000AEBF3D /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861F6C4250AD05000AEBF3D /* CommentTableViewCell.swift */; };
+		1861F6C7250AD05000AEBF3D /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1861F6C5250AD05000AEBF3D /* CommentTableViewCell.xib */; };
+		1861F6C9250B683F00AEBF3D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861F6C8250B683F00AEBF3D /* Colors.swift */; };
+		1861F6CB250BE8C100AEBF3D /* ProfileCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861F6CA250BE8C100AEBF3D /* ProfileCollectionViewFlowLayout.swift */; };
+		186A7E792517D86900E58C1B /* PostsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7E782517D86900E58C1B /* PostsRequest.swift */; };
+		186A7E7C2517D87600E58C1B /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7E7B2517D87600E58C1B /* UserRequest.swift */; };
+		186A7E812517D97400E58C1B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7E802517D97400E58C1B /* User.swift */; };
+		186A7E9A2517DE3800E58C1B /* VideoPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7E992517DE3800E58C1B /* VideoPlayerManager.swift */; };
+		186A7EB82518611400E58C1B /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7EB72518611400E58C1B /* NetworkModel.swift */; };
+		186A7EBC2518989700E58C1B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7EBB2518989600E58C1B /* Comment.swift */; };
+		186A7EC025194F9000E58C1B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7EBF25194F9000E58C1B /* BaseViewController.swift */; };
+		186A7EE62519A20A00E58C1B /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 186A7EE52519A20A00E58C1B /* LoadingAnimation.json */; };
+		186A7EEB251BD51F00E58C1B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7EEA251BD51F00E58C1B /* String.swift */; };
+		186A7EF5251C892500E58C1B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7EF4251C892500E58C1B /* ProfileViewModel.swift */; };
+		186A7F13251D162D00E58C1B /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A7F12251D162D00E58C1B /* VideoPlayerView.swift */; };
+		18D4C73225147A69008B2B86 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4C73125147A69008B2B86 /* Constants.swift */; };
+		D3D7D0D9BD19525BDB32DCEC /* Pods_KD_Tiktok_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1682FE51B63DAC4C72E8F61B /* Pods_KD_Tiktok_Clone.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1682FE51B63DAC4C72E8F61B /* Pods_KD_Tiktok_Clone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KD_Tiktok_Clone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		180705E5250801130096A4A5 /* KD Tiktok-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KD Tiktok-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		180705E8250801130096A4A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		180705EA250801130096A4A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		180705EC250801130096A4A5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		180705EE250801130096A4A5 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		180705F3250801160096A4A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		180705F6250801160096A4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		180705F8250801160096A4A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		180705FE250802410096A4A5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		18070600250802AA0096A4A5 /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		18070602250802BB0096A4A5 /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		18070604250802C60096A4A5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1807060E250825F90096A4A5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		1807061025082DE40096A4A5 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		1807061125082DE40096A4A5 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		18070615250832040096A4A5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		18070617250847030096A4A5 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
+		180706192508BB820096A4A5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1807061E250986750096A4A5 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
+		180D0360250F4E4400009875 /* UIKit Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit Extensions.swift"; sourceTree = "<group>"; };
+		180D0362250F4EFA00009875 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		180D0364250F501400009875 /* ProfileSlideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSlideBarView.swift; sourceTree = "<group>"; };
+		180D0366250F502E00009875 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		180D0368250F512900009875 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		182E8C0F251D363B006FEC65 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		182E8C13251E909C006FEC65 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		1861F6BC250AB38E00AEBF3D /* CommentPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPopUpView.swift; sourceTree = "<group>"; };
+		1861F6C4250AD05000AEBF3D /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		1861F6C5250AD05000AEBF3D /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		1861F6C8250B683F00AEBF3D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		1861F6CA250BE8C100AEBF3D /* ProfileCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		186A7E782517D86900E58C1B /* PostsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRequest.swift; sourceTree = "<group>"; };
+		186A7E7B2517D87600E58C1B /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
+		186A7E802517D97400E58C1B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		186A7E992517DE3800E58C1B /* VideoPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerManager.swift; sourceTree = "<group>"; };
+		186A7EB72518611400E58C1B /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		186A7EBB2518989600E58C1B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		186A7EBF25194F9000E58C1B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		186A7EE52519A20A00E58C1B /* LoadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
+		186A7EEA251BD51F00E58C1B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		186A7EF4251C892500E58C1B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		186A7F12251D162D00E58C1B /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		18D4C73125147A69008B2B86 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3E1BB91642D43B000CFDEB37 /* Pods-KD Tiktok-Clone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KD Tiktok-Clone.debug.xcconfig"; path = "Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone.debug.xcconfig"; sourceTree = "<group>"; };
+		90A724D57C80B8CCC4049160 /* Pods-KD Tiktok-Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KD Tiktok-Clone.release.xcconfig"; path = "Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		180705E2250801130096A4A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3D7D0D9BD19525BDB32DCEC /* Pods_KD_Tiktok_Clone.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		180705DC250801130096A4A5 = {
+			isa = PBXGroup;
+			children = (
+				180705E7250801130096A4A5 /* KD Tiktok-Clone */,
+				180705E6250801130096A4A5 /* Products */,
+				CDF68E812C55B398EDFDCCA0 /* Pods */,
+				B3EA5AABE997AB380B3857EE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		180705E6250801130096A4A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				180705E5250801130096A4A5 /* KD Tiktok-Clone.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		180705E7250801130096A4A5 /* KD Tiktok-Clone */ = {
+			isa = PBXGroup;
+			children = (
+				18D4C72A251442C0008B2B86 /* MainApplication */,
+				18070614250831F20096A4A5 /* Entity */,
+				18070607250802E90096A4A5 /* Modules */,
+				186A7E762517D4E900E58C1B /* Network */,
+				18070606250802DE0096A4A5 /* Extensions */,
+				18D4C72925144282008B2B86 /* Utils */,
+				18D4C72D251442EF008B2B86 /* Resources */,
+				180705F5250801160096A4A5 /* LaunchScreen.storyboard */,
+				180705F8250801160096A4A5 /* Info.plist */,
+			);
+			path = "KD Tiktok-Clone";
+			sourceTree = "<group>";
+		};
+		18070606250802DE0096A4A5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18070617250847030096A4A5 /* Number.swift */,
+				1861F6C8250B683F00AEBF3D /* Colors.swift */,
+				180D0360250F4E4400009875 /* UIKit Extensions.swift */,
+				186A7EEA251BD51F00E58C1B /* String.swift */,
+				182E8C0F251D363B006FEC65 /* URL.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		18070607250802E90096A4A5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				18070608250802EF0096A4A5 /* Home */,
+				18070609250802F70096A4A5 /* Discover */,
+				1807060A250802FD0096A4A5 /* Media */,
+				1807060B250803040096A4A5 /* Inbox */,
+				1807060C250803080096A4A5 /* Profile */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		18070608250802EF0096A4A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				186A7E602516F9DF00E58C1B /* Models */,
+				180705EC250801130096A4A5 /* HomeViewController.swift */,
+				1807060D250820E30096A4A5 /* Views */,
+				186A7E592516DCC600E58C1B /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		18070609250802F70096A4A5 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				180705EE250801130096A4A5 /* DiscoverViewController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		1807060A250802FD0096A4A5 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				18070600250802AA0096A4A5 /* MediaViewController.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		1807060B250803040096A4A5 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				18070602250802BB0096A4A5 /* InboxViewController.swift */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		1807060C250803080096A4A5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1861F6CC250BF0DD00AEBF3D /* Views */,
+				18070604250802C60096A4A5 /* ProfileViewController.swift */,
+				186A7EF4251C892500E58C1B /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		1807060D250820E30096A4A5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1861F6BC250AB38E00AEBF3D /* CommentPopUpView.swift */,
+				186A7F12251D162D00E58C1B /* VideoPlayerView.swift */,
+				1861F6C0250AB9C200AEBF3D /* Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		18070614250831F20096A4A5 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				186A7EED251BD6A100E58C1B /* VideoCache */,
+				186A7EEE251BD6B900E58C1B /* Models */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		1861F6C0250AB9C200AEBF3D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1807061025082DE40096A4A5 /* HomeTableViewCell.swift */,
+				1807061125082DE40096A4A5 /* HomeTableViewCell.xib */,
+				1861F6C4250AD05000AEBF3D /* CommentTableViewCell.swift */,
+				1861F6C5250AD05000AEBF3D /* CommentTableViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		1861F6CC250BF0DD00AEBF3D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1861F6CA250BE8C100AEBF3D /* ProfileCollectionViewFlowLayout.swift */,
+				180D0366250F502E00009875 /* ProfileHeaderView.xib */,
+				180D0362250F4EFA00009875 /* ProfileHeaderView.swift */,
+				180D0364250F501400009875 /* ProfileSlideBarView.swift */,
+				180D0368250F512900009875 /* ProfileCollectionViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		186A7E592516DCC600E58C1B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1807060E250825F90096A4A5 /* HomeViewModel.swift */,
+				186A7E992517DE3800E58C1B /* VideoPlayerManager.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		186A7E602516F9DF00E58C1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		186A7E762517D4E900E58C1B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				186A7EB72518611400E58C1B /* NetworkModel.swift */,
+				186A7E7E2517D87F00E58C1B /* GetRequests */,
+				186A7E7F2517D88900E58C1B /* PostRequests */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		186A7E7E2517D87F00E58C1B /* GetRequests */ = {
+			isa = PBXGroup;
+			children = (
+				186A7E782517D86900E58C1B /* PostsRequest.swift */,
+				186A7E7B2517D87600E58C1B /* UserRequest.swift */,
+			);
+			path = GetRequests;
+			sourceTree = "<group>";
+		};
+		186A7E7F2517D88900E58C1B /* PostRequests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PostRequests;
+			sourceTree = "<group>";
+		};
+		186A7EC72519A1B300E58C1B /* Lotties */ = {
+			isa = PBXGroup;
+			children = (
+				186A7EE52519A20A00E58C1B /* LoadingAnimation.json */,
+			);
+			path = Lotties;
+			sourceTree = "<group>";
+		};
+		186A7EED251BD6A100E58C1B /* VideoCache */ = {
+			isa = PBXGroup;
+			children = (
+				1807061E250986750096A4A5 /* VideoCacheManager.swift */,
+			);
+			path = VideoCache;
+			sourceTree = "<group>";
+		};
+		186A7EEE251BD6B900E58C1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				186A7E802517D97400E58C1B /* User.swift */,
+				18070615250832040096A4A5 /* Post.swift */,
+				186A7EBB2518989600E58C1B /* Comment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		18D4C72925144282008B2B86 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				180706192508BB820096A4A5 /* GoogleService-Info.plist */,
+				18D4C73125147A69008B2B86 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		18D4C72A251442C0008B2B86 /* MainApplication */ = {
+			isa = PBXGroup;
+			children = (
+				180705E8250801130096A4A5 /* AppDelegate.swift */,
+				180705EA250801130096A4A5 /* SceneDelegate.swift */,
+				180705FE250802410096A4A5 /* TabBarController.swift */,
+				182E8C13251E909C006FEC65 /* BaseNavigationController.swift */,
+				186A7EBF25194F9000E58C1B /* BaseViewController.swift */,
+			);
+			path = MainApplication;
+			sourceTree = "<group>";
+		};
+		18D4C72D251442EF008B2B86 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				186A7EC72519A1B300E58C1B /* Lotties */,
+				180705F3250801160096A4A5 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3EA5AABE997AB380B3857EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1682FE51B63DAC4C72E8F61B /* Pods_KD_Tiktok_Clone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDF68E812C55B398EDFDCCA0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E1BB91642D43B000CFDEB37 /* Pods-KD Tiktok-Clone.debug.xcconfig */,
+				90A724D57C80B8CCC4049160 /* Pods-KD Tiktok-Clone.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		180705E4250801130096A4A5 /* KD Tiktok-Clone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 180705FB250801160096A4A5 /* Build configuration list for PBXNativeTarget "KD Tiktok-Clone" */;
+			buildPhases = (
+				C9D519F4CA3152E27B7E501C /* [CP] Check Pods Manifest.lock */,
+				180705E1250801130096A4A5 /* Sources */,
+				180705E2250801130096A4A5 /* Frameworks */,
+				180705E3250801130096A4A5 /* Resources */,
+				7730BF65C5702D4E5DC608F0 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KD Tiktok-Clone";
+			productName = "KD Tiktok-Clone";
+			productReference = 180705E5250801130096A4A5 /* KD Tiktok-Clone.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		180705DD250801130096A4A5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1170;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = Kaishan;
+				TargetAttributes = {
+					180705E4250801130096A4A5 = {
+						CreatedOnToolsVersion = 11.7;
+					};
+				};
+			};
+			buildConfigurationList = 180705E0250801130096A4A5 /* Build configuration list for PBXProject "KD Tiktok-Clone" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 180705DC250801130096A4A5;
+			productRefGroup = 180705E6250801130096A4A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				180705E4250801130096A4A5 /* KD Tiktok-Clone */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		180705E3250801130096A4A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1861F6C7250AD05000AEBF3D /* CommentTableViewCell.xib in Resources */,
+				180705F7250801160096A4A5 /* LaunchScreen.storyboard in Resources */,
+				186A7EE62519A20A00E58C1B /* LoadingAnimation.json in Resources */,
+				1807061325082DE40096A4A5 /* HomeTableViewCell.xib in Resources */,
+				180705F4250801160096A4A5 /* Assets.xcassets in Resources */,
+				180D0367250F502E00009875 /* ProfileHeaderView.xib in Resources */,
+				1807061A2508BB820096A4A5 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7730BF65C5702D4E5DC608F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9D519F4CA3152E27B7E501C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KD Tiktok-Clone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		180705E1250801130096A4A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18070603250802BB0096A4A5 /* InboxViewController.swift in Sources */,
+				180D0361250F4E4500009875 /* UIKit Extensions.swift in Sources */,
+				18070616250832040096A4A5 /* Post.swift in Sources */,
+				186A7EBC2518989700E58C1B /* Comment.swift in Sources */,
+				186A7EB82518611400E58C1B /* NetworkModel.swift in Sources */,
+				186A7E812517D97400E58C1B /* User.swift in Sources */,
+				1861F6C9250B683F00AEBF3D /* Colors.swift in Sources */,
+				1807060F250825F90096A4A5 /* HomeViewModel.swift in Sources */,
+				18D4C73225147A69008B2B86 /* Constants.swift in Sources */,
+				180705EF250801130096A4A5 /* DiscoverViewController.swift in Sources */,
+				1861F6CB250BE8C100AEBF3D /* ProfileCollectionViewFlowLayout.swift in Sources */,
+				180D0363250F4EFA00009875 /* ProfileHeaderView.swift in Sources */,
+				186A7EF5251C892500E58C1B /* ProfileViewModel.swift in Sources */,
+				186A7EEB251BD51F00E58C1B /* String.swift in Sources */,
+				182E8C14251E909C006FEC65 /* BaseNavigationController.swift in Sources */,
+				182E8C10251D363B006FEC65 /* URL.swift in Sources */,
+				18070601250802AA0096A4A5 /* MediaViewController.swift in Sources */,
+				186A7F13251D162D00E58C1B /* VideoPlayerView.swift in Sources */,
+				180705ED250801130096A4A5 /* HomeViewController.swift in Sources */,
+				180705E9250801130096A4A5 /* AppDelegate.swift in Sources */,
+				1807061225082DE40096A4A5 /* HomeTableViewCell.swift in Sources */,
+				18070618250847030096A4A5 /* Number.swift in Sources */,
+				180D0369250F512900009875 /* ProfileCollectionViewCell.swift in Sources */,
+				180705FF250802410096A4A5 /* TabBarController.swift in Sources */,
+				1861F6C6250AD05000AEBF3D /* CommentTableViewCell.swift in Sources */,
+				186A7E792517D86900E58C1B /* PostsRequest.swift in Sources */,
+				1807061F250986760096A4A5 /* VideoCacheManager.swift in Sources */,
+				1861F6BD250AB38E00AEBF3D /* CommentPopUpView.swift in Sources */,
+				186A7E7C2517D87600E58C1B /* UserRequest.swift in Sources */,
+				186A7E9A2517DE3800E58C1B /* VideoPlayerManager.swift in Sources */,
+				180D0365250F501400009875 /* ProfileSlideBarView.swift in Sources */,
+				18070605250802C60096A4A5 /* ProfileViewController.swift in Sources */,
+				180705EB250801130096A4A5 /* SceneDelegate.swift in Sources */,
+				186A7EC025194F9000E58C1B /* BaseViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		180705F5250801160096A4A5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				180705F6250801160096A4A5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		180705F9250801160096A4A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		180705FA250801160096A4A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		180705FC250801160096A4A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E1BB91642D43B000CFDEB37 /* Pods-KD Tiktok-Clone.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 458XY7U8R6;
+				INFOPLIST_FILE = "KD Tiktok-Clone/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kaishan.KD-Tiktok-Clone";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		180705FD250801160096A4A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90A724D57C80B8CCC4049160 /* Pods-KD Tiktok-Clone.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 458XY7U8R6;
+				INFOPLIST_FILE = "KD Tiktok-Clone/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kaishan.KD-Tiktok-Clone";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		180705E0250801130096A4A5 /* Build configuration list for PBXProject "KD Tiktok-Clone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				180705F9250801160096A4A5 /* Debug */,
+				180705FA250801160096A4A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		180705FB250801160096A4A5 /* Build configuration list for PBXNativeTarget "KD Tiktok-Clone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				180705FC250801160096A4A5 /* Debug */,
+				180705FD250801160096A4A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 180705DD250801130096A4A5 /* Project object */;
+}
