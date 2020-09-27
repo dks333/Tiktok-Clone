@@ -11,7 +11,6 @@ target 'KD Tiktok-Clone' do
   # Pods for KD Tiktok-Clone
   pod 'SnapKit'
   pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
   pod 'MarqueeLabel'
   pod 'lottie-ios'
   
