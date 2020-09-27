@@ -6,7 +6,7 @@
   <img src="/Images/Notes/Structure.png" />
 </p>
 
-## Video Cache (L2 Cache)
+## Video Cache (Two-Level Caching)
 
 All videos downloaded from Network Model are stored in both memory(**NSCache**) and disk(**FileManager**). 
 

@@ -14,13 +14,11 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 
 ## Home
 
-<iframe class="imgur-embed" width="100%" height="434" frameborder="0" src="https://i.imgur.com/SbTy27y.gifv#embed"></iframe>
-
-<img src="/Images/HomeVideo.gif" width="200" height="434">&nbsp; <img src="/Images/CommentVideo.gif" width="200" height="434">&nbsp; <img src="/Images/LikeVideo.gif" width="200" height="434">&nbsp; <img src="/Images/PauseVideo.gif" width="200" height="434">
+<img src="https://media.giphy.com/media/QIGTuNQDUEqDdZgptA/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/ZEzpoFHxElvGUJX146/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/7et8cbi5Yq8LkkOVd2/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/usRgcCeNQwEckgRyhb/giphy.gif" width="200" height="434">
 
 ## Profile
 
-<img src="/Images/ProfileVideo.gif" width="200" height="434">&nbsp; <img src="/Images/CacheVideo.gif" width="200" height="434">
+<img src="https://media.giphy.com/media/4XvptjQG8weB9256I7/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/nJl4KfKT0QCehyoWNK/giphy.gif" width="200" height="434">
 
 ## Third Party Libraries
 
