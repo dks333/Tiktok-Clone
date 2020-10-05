@@ -111,7 +111,7 @@ In this module, the UI structure is pretty simple. I utilized a customized `UIVi
 
 ### Uploading Video
 
-Uploading videos by calling `videoRef.putFile(from: videoURL, metadata: nil) ` from Firebase Storage and save video file to Photo Library.
+Upload videos by calling `videoRef.putFile(from: videoURL, metadata: nil) ` from Firebase Storage and save video file to Photo Library.
 
 ## Profile
 
