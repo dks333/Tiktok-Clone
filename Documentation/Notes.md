@@ -107,11 +107,11 @@ In this module, the UI structure is pretty simple. I utilized a customized `UIVi
 
 ### Shooting Video
 
-`CameraManager` manages capture session, its configurations, video file outputs, and devices' permissions. When it starts the recording, the `RecordButton` starts to animate until the recording ends. The video file is store in a temporary directory on the device and will be removed when users shoot a new video. 
+`CameraManager` manages capture session, its configurations, video file outputs, and devices' permissions. When it starts the recording, the `RecordButton` starts to animate until the recording ends. The video file is stored in a temporary directory on the device and will be removed once users shoot a new video. 
 
 ### Uploading Video
 
-Uploading videos by calling `videoRef.putFile(from: videoURL, metadata: nil) ` from Firebase Storage.
+Uploading videos by calling `videoRef.putFile(from: videoURL, metadata: nil) ` from Firebase Storage and save video file to Photo Library.
 
 ## Profile
 
