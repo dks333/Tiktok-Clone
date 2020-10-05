@@ -1,4 +1,7 @@
+![](/Users/apple/Desktop/Coding Project/Tiktok-Clone/Images/banner.png)
+
 # Tiktok Clone
+
 iOS Tiktok Clone built with **Swift(Frontend)** and **Firebase(Backend)**
 
 Tiktok Clone contains Chinese Tiktok version and U.S. Tiktok version.
@@ -12,9 +15,17 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 
 # Preview
 
+## Screenshots
+
+<img src="/Images/home.PNG" width="200" height="434"> <img src="/Images/media.PNG" width="200" height="434"> <img src="/Images/profile.PNG" width="200" height="434">
+
 ## Home
 
 <img src="https://media.giphy.com/media/QIGTuNQDUEqDdZgptA/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/ZEzpoFHxElvGUJX146/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/7et8cbi5Yq8LkkOVd2/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/usRgcCeNQwEckgRyhb/giphy.gif" width="200" height="434">
+
+## Media
+
+<img src="https://media.giphy.com/media/Oa0cMPAWz2TLfJxs9G/giphy.gif" width="200" height="434">&nbsp;<img src="https://media.giphy.com/media/PtCvddg95i7qgKasIq/giphy.gif" width="200" height="434">
 
 ## Profile
 
