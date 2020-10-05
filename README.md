@@ -21,7 +21,7 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 
 ## Media
 
-<img src="https://media.giphy.com/media/hhaW2homudFtnL7SM7/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/PtCvddg95i7qgKasIq/giphy.gif" width="200" height="434">
+<img src="/Images/recordVideo.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/PtCvddg95i7qgKasIq/giphy.gif" width="200" height="434">
 
 ## Profile
 
