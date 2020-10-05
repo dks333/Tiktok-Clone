@@ -168,9 +168,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            //print(indexPath.row)
-        }
+//        for indexPath in indexPaths {
+//            print(indexPath.row)
+//        }
     }
     
     

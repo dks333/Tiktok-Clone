@@ -25,7 +25,7 @@ class HomeViewModel: NSObject {
     
     override init() {
         super.init()
-        getPosts(pageNumber: 1, size: 5)
+        getPosts(pageNumber: 1, size: 10)
     }
     
     // Setup Audio

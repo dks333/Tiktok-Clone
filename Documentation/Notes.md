@@ -95,6 +95,24 @@ I used to `UITapGestureRecognizer` to detect single taps and double taps. By usi
 
 I am using MVVM with RxSwift in this module. The ViewModel manages all logic in network and user interaction bindings.
 
+## Media
+
+### UI Structure
+
+In this module, the UI structure is pretty simple. I utilized a customized `UIView` to display previewView and `AVPlayerLayer`. In the `MediaPostViewController`, I used stackviews to organize elements
+
+### Logic Structure
+
+![](/Images/Notes/mediaLogicStructure.png)
+
+### Shooting Video
+
+`CameraManager` manages capture session, its configurations, video file outputs, and devices' permissions. When it starts the recording, the `RecordButton` starts to animate until the recording ends. The video file is store in a temporary directory on the device and will be removed when users shoot a new video. 
+
+### Uploading Video
+
+Uploading videos by calling `videoRef.putFile(from: videoURL, metadata: nil) ` from Firebase Storage.
+
 ## Profile
 
 ### UI Structure

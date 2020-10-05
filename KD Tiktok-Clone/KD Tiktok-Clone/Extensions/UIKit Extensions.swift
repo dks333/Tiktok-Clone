@@ -19,14 +19,14 @@ extension UIViewController{
     }
     
     /// Display an alert view if the function is not implemented
-    func showAlert(_ message: String){
+    func showAlert(_ message: String, title: String? = nil){
         // Check if one has already presented
         if let currentAlert = self.presentedViewController as? UIAlertController {
             currentAlert.message = message
             return
         }
         
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
 

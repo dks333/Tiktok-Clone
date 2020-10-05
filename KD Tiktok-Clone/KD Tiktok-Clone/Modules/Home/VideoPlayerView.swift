@@ -87,7 +87,7 @@ class VideoPlayerView: UIView {
                     self.videoURL = redirectUrl
                 }
                 self.originalURL = url
-                print(self.videoURL?.absoluteString)
+                
                 
                 self.asset = AVURLAsset(url: self.videoURL!)
                 self.asset!.resourceLoader.setDelegate(self, queue: .main)
@@ -159,7 +159,7 @@ extension VideoPlayerView {
     
     fileprivate func addObserverToPlayerItem() {
         // Register as an observer of the player item's status property
-        self.observer = self.playerItem!.observe(\.status, options: [.initial, .new], changeHandler: { [weak self] item, _ in
+        self.observer = self.playerItem!.observe(\.status, options: [.initial, .new], changeHandler: { item, _ in
             let status = item.status
             // Switch over the status
             switch status {

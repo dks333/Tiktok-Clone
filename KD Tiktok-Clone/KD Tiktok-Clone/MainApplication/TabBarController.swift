@@ -30,8 +30,7 @@ class TabBarController:  UITabBarController, UITabBarControllerDelegate {
         tabBar.tintColor = .white
         
         homeViewController = HomeViewController()
-        homeNavigationController = BaseNavigationController()
-        homeNavigationController.viewControllers = [homeViewController]
+        homeNavigationController = BaseNavigationController(rootViewController: homeViewController)
         discoverViewController = DiscoverViewController()
         mediaViewController = MediaViewController()
         inboxViewController = InboxViewController()
@@ -44,8 +43,7 @@ class TabBarController:  UITabBarController, UITabBarControllerDelegate {
         discoverViewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         discoverViewController.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
         
-        mediaViewController.tabBarItem.image = UIImage(systemName: "plus.square")
-        mediaViewController.tabBarItem.selectedImage = UIImage(systemName: "plus.square.fill")
+        mediaViewController.tabBarItem.image = UIImage(named: "addMedia")
         
         inboxViewController.tabBarItem.image = UIImage(systemName: "text.bubble")
         inboxViewController.tabBarItem.selectedImage = UIImage(systemName: "text.bubble.fill")
@@ -59,19 +57,26 @@ class TabBarController:  UITabBarController, UITabBarControllerDelegate {
         
         for (index, tabBarItem) in tabBar.items!.enumerated() {
             tabBarItem.title = tabBarItemTitle[index]
-            //tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if index == 2 {
+                // Media Button
+                tabBarItem.title = ""
+                tabBarItem.imageInsets = UIEdgeInsets(top: -6, left: 0, bottom: -6, right: 0)
+                
+            }
         }
     }
     
     //MARK: UITabbar Delegate
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-      if viewController.isKind(of: MediaViewController.self) {
-         let vc =  MediaViewController()
-         vc.modalPresentationStyle = .overFullScreen
-         self.present(vc, animated: true, completion: nil)
-         return false
-      }
+        if viewController.isKind(of: MediaViewController.self) {
+            let vc =  UIStoryboard(name: "MediaViews", bundle: nil).instantiateViewController(identifier: "MediaVC") as! MediaViewController
+            let navigationController = BaseNavigationController.init(rootViewController: vc)
+            navigationController.modalPresentationStyle = .overFullScreen
+            self.present(navigationController, animated: true, completion: nil)
+            return false
+        }
       return true
     }
+    
     
 }
