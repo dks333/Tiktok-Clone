@@ -1,4 +1,4 @@
-![](/Users/apple/Desktop/Coding Project/Tiktok-Clone/Images/banner.png)
+![](/Images/banner.png)
 
 # Tiktok Clone
 
@@ -15,10 +15,6 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 
 # Preview
 
-## Screenshots
-
-<img src="/Images/home.PNG" width="200" height="434"> <img src="/Images/media.PNG" width="200" height="434"> <img src="/Images/profile.PNG" width="200" height="434">
-
 ## Home
 
 <img src="https://media.giphy.com/media/QIGTuNQDUEqDdZgptA/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/ZEzpoFHxElvGUJX146/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/7et8cbi5Yq8LkkOVd2/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/usRgcCeNQwEckgRyhb/giphy.gif" width="200" height="434">
@@ -30,6 +26,10 @@ TikTok, known in China as Douyin, is a video-sharing social networking service o
 ## Profile
 
 <img src="https://media.giphy.com/media/4XvptjQG8weB9256I7/giphy.gif" width="200" height="434">&nbsp; <img src="https://media.giphy.com/media/nJl4KfKT0QCehyoWNK/giphy.gif" width="200" height="434">
+
+## Screenshots
+
+<img src="/Images/home.PNG" width="200" height="434">  <img src="/Images/media.PNG" width="200" height="434">  <img src="/Images/profile.PNG" width="200" height="434">
 
 ## Third Party Libraries
 
