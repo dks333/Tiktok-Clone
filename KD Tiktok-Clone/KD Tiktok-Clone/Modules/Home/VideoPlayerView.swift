@@ -73,38 +73,54 @@ class VideoPlayerView: UIView {
             return
         }
         self.fileExtension = fileExtension
-        VideoCacheManager.shared.queryURLFromCache(key: url.absoluteString, fileExtension: fileExtension, completion: {[weak self] (data) in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                if let path = data as? String {
-                    self.videoURL = URL(fileURLWithPath: path)
-                } else {
-                    // Adding Redirect URL(customized prefix schema) to trigger AVAssetResourceLoaderDelegate
-                    guard let redirectUrl = url.convertToRedirectURL(scheme: "streaming") else {
-                        print("\(url)\nCould not convert the url to a redirect url.")
-                        return
-                    }
-                    self.videoURL = redirectUrl
-                }
-                self.originalURL = url
-                
-                
-                self.asset = AVURLAsset(url: self.videoURL!)
-                self.asset!.resourceLoader.setDelegate(self, queue: .main)
-                
-                self.playerItem = AVPlayerItem(asset: self.asset!)
-                self.addObserverToPlayerItem()
-                
-                if let queuePlayer = self.queuePlayer {
-                    queuePlayer.replaceCurrentItem(with: self.playerItem)
-                } else {
-                    self.queuePlayer = AVQueuePlayer(playerItem: self.playerItem)
-                }
-                
-                self.playerLooper = AVPlayerLooper(player: self.queuePlayer!, templateItem: self.queuePlayer!.currentItem!)
-                self.avPlayerLayer.player = self.queuePlayer
-            }
-        })
+        self.videoURL = url
+        self.originalURL = url
+        self.asset = AVURLAsset(url: self.videoURL!)
+        self.asset!.resourceLoader.setDelegate(self, queue: .main)
+        
+        self.playerItem = AVPlayerItem(asset: self.asset!)
+        self.addObserverToPlayerItem()
+        
+        if let queuePlayer = self.queuePlayer {
+            queuePlayer.replaceCurrentItem(with: self.playerItem)
+        } else {
+            self.queuePlayer = AVQueuePlayer(playerItem: self.playerItem)
+        }
+        
+        self.playerLooper = AVPlayerLooper(player: self.queuePlayer!, templateItem: self.queuePlayer!.currentItem!)
+        self.avPlayerLayer.player = self.queuePlayer
+//        VideoCacheManager.shared.queryURLFromCache(key: url.absoluteString, fileExtension: fileExtension, completion: {[weak self] (data) in
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                if let path = data as? String {
+//                    self.videoURL = URL(fileURLWithPath: path)
+//                } else {
+//                    // Adding Redirect URL(customized prefix schema) to trigger AVAssetResourceLoaderDelegate
+//                    guard let redirectUrl = url.convertToRedirectURL(scheme: "streaming") else {
+//                        print("\(url)\nCould not convert the url to a redirect url.")
+//                        return
+//                    }
+//                    self.videoURL = redirectUrl
+//                }
+//                self.originalURL = url
+//                
+//                
+//                self.asset = AVURLAsset(url: self.videoURL!)
+//                self.asset!.resourceLoader.setDelegate(self, queue: .main)
+//                
+//                self.playerItem = AVPlayerItem(asset: self.asset!)
+//                self.addObserverToPlayerItem()
+//                
+//                if let queuePlayer = self.queuePlayer {
+//                    queuePlayer.replaceCurrentItem(with: self.playerItem)
+//                } else {
+//                    self.queuePlayer = AVQueuePlayer(playerItem: self.playerItem)
+//                }
+//                
+//                self.playerLooper = AVPlayerLooper(player: self.queuePlayer!, templateItem: self.queuePlayer!.currentItem!)
+//                self.avPlayerLayer.player = self.queuePlayer
+//            }
+//        })
     }
     
     /// Clear all remote or local request

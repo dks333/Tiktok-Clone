@@ -57,6 +57,13 @@
 		189ED873252B1C0C00C35A5B /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189ED872252B1C0B00C35A5B /* MediaPlayerView.swift */; };
 		18D4C73225147A69008B2B86 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4C73125147A69008B2B86 /* Constants.swift */; };
 		D3D7D0D9BD19525BDB32DCEC /* Pods_KD_Tiktok_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1682FE51B63DAC4C72E8F61B /* Pods_KD_Tiktok_Clone.framework */; };
+		E148D39427411D3100FBF306 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D38D27411D3100FBF306 /* video2.mp4 */; };
+		E148D39527411D3100FBF306 /* video6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D38E27411D3100FBF306 /* video6.mp4 */; };
+		E148D39627411D3100FBF306 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D38F27411D3100FBF306 /* video4.mp4 */; };
+		E148D39727411D3100FBF306 /* video7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D39027411D3100FBF306 /* video7.mp4 */; };
+		E148D39827411D3100FBF306 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D39127411D3100FBF306 /* video3.mp4 */; };
+		E148D39927411D3100FBF306 /* video5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D39227411D3100FBF306 /* video5.mp4 */; };
+		E148D39A27411D3100FBF306 /* video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E148D39327411D3100FBF306 /* video1.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +121,13 @@
 		18D4C73125147A69008B2B86 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3E1BB91642D43B000CFDEB37 /* Pods-KD Tiktok-Clone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KD Tiktok-Clone.debug.xcconfig"; path = "Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone.debug.xcconfig"; sourceTree = "<group>"; };
 		90A724D57C80B8CCC4049160 /* Pods-KD Tiktok-Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KD Tiktok-Clone.release.xcconfig"; path = "Target Support Files/Pods-KD Tiktok-Clone/Pods-KD Tiktok-Clone.release.xcconfig"; sourceTree = "<group>"; };
+		E148D38D27411D3100FBF306 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
+		E148D38E27411D3100FBF306 /* video6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video6.mp4; sourceTree = "<group>"; };
+		E148D38F27411D3100FBF306 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
+		E148D39027411D3100FBF306 /* video7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video7.mp4; sourceTree = "<group>"; };
+		E148D39127411D3100FBF306 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
+		E148D39227411D3100FBF306 /* video5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video5.mp4; sourceTree = "<group>"; };
+		E148D39327411D3100FBF306 /* video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video1.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +145,13 @@
 		180705DC250801130096A4A5 = {
 			isa = PBXGroup;
 			children = (
+				E148D39327411D3100FBF306 /* video1.mp4 */,
+				E148D38D27411D3100FBF306 /* video2.mp4 */,
+				E148D39127411D3100FBF306 /* video3.mp4 */,
+				E148D38F27411D3100FBF306 /* video4.mp4 */,
+				E148D39227411D3100FBF306 /* video5.mp4 */,
+				E148D38E27411D3100FBF306 /* video6.mp4 */,
+				E148D39027411D3100FBF306 /* video7.mp4 */,
 				180705E7250801130096A4A5 /* KD Tiktok-Clone */,
 				180705E6250801130096A4A5 /* Products */,
 				CDF68E812C55B398EDFDCCA0 /* Pods */,
@@ -464,6 +485,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E148D39427411D3100FBF306 /* video2.mp4 in Resources */,
+				E148D39527411D3100FBF306 /* video6.mp4 in Resources */,
+				E148D39627411D3100FBF306 /* video4.mp4 in Resources */,
+				E148D39727411D3100FBF306 /* video7.mp4 in Resources */,
+				E148D39827411D3100FBF306 /* video3.mp4 in Resources */,
+				E148D39927411D3100FBF306 /* video5.mp4 in Resources */,
+				E148D39A27411D3100FBF306 /* video1.mp4 in Resources */,
 				1861F6C7250AD05000AEBF3D /* CommentTableViewCell.xib in Resources */,
 				180705F7250801160096A4A5 /* LaunchScreen.storyboard in Resources */,
 				189ED84B25268C1C00C35A5B /* MediaViews.storyboard in Resources */,
