@@ -20,6 +20,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Tiktok Clone uses the camera to take photos and video.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Tiktok Clone uses the microphone to record sound</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tiktok Clone saves captured photos and videos to your photo library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -68,11 +74,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Tiktok Clone uses the camera to take photos and video.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Tiktok Clone uses the microphone to record sound</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Tiktok Clone saves captured photos and videos to your photo library.</string>
 </dict>
 </plist>

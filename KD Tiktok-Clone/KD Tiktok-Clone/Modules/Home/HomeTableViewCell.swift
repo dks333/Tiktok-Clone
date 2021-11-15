@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import MarqueeLabel
 
-protocol HomeCellNavigationDelegate: class {
+protocol HomeCellNavigationDelegate: AnyObject {
     // Navigate to Profile Page
     func navigateToProfilePage(uid: String, name: String)
 }
@@ -22,26 +22,13 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameBtn: UIButton!
     @IBOutlet weak var captionLbl: UILabel!
     @IBOutlet weak var musicLbl: MarqueeLabel!
-    @IBOutlet weak var profileImgView: UIImageView!{
-        didSet{
-            profileImgView.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToProfilePage))
-            profileImgView.addGestureRecognizer(tapGesture)
-        }
-    }
-    @IBOutlet weak var followBtn: UIButton!
-    @IBOutlet weak var likeBtn: UIButton!
-    @IBOutlet weak var likeCountLbl: UILabel!
-    @IBOutlet weak var commentBtn: UIButton!
-    @IBOutlet weak var commentCountLbl: UILabel!
-    @IBOutlet weak var shareBtn: UIButton!
-    @IBOutlet weak var musicBtn: UIButton!
-    @IBOutlet weak var shareCountLbl: UILabel!
     @IBOutlet weak var pauseImgView: UIImageView!{
         didSet{
             pauseImgView.alpha = 0
         }
     }
+    
+    @IBOutlet var imageViewsInspireation: [UIImageView]!
     
     // MARK: - Variables
     private(set) var isPlaying = false
@@ -58,9 +45,6 @@ class HomeTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        profileImgView.makeRounded(color: .white, borderWidth: 1)
-        followBtn.makeRounded(color: .clear, borderWidth: 0)
-        musicBtn.makeRounded(color: .clear, borderWidth: 0)
     }
     
     override func awakeFromNib() {
@@ -91,13 +75,21 @@ class HomeTableViewCell: UITableViewCell {
         nameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         musicLbl.text = post.music + "   " + post.music + "   " + post.music + "   "// Long enough to enable scrolling
         captionLbl.text = post.caption
-        likeCountLbl.text = post.likeCount.shorten()
-        //commentCountLbl.text = post.comments?.count.shorten()
-        shareCountLbl.text = post.shareCount.shorten()
         
         playerView.configure(url: post.videoURL, fileExtension: post.videoFileExtension, size: (post.videoWidth, post.videoHeight))
+
     }
     
+    func animatePhotos() {
+        UIView.animate(withDuration: 0.3, delay: 2.0, options: .curveEaseInOut) { [weak self] in
+            self?.imageViewsInspireation.forEach({ imageView in
+                imageView.image = UIImage(named: "ProfileBackground")
+            })
+            self?.imageViewsInspireation.forEach{ $0.alpha = 1 }
+        } completion: { _ in
+            
+        }
+    }
     
     func replay(){
         if !isPlaying {
@@ -145,7 +137,6 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func resetViewsForReuse(){
-        likeBtn.tintColor = .white
         pauseImgView.alpha = 0
     }
     
@@ -157,7 +148,6 @@ class HomeTableViewCell: UITableViewCell {
             likeVideo()
         } else {
             liked = false
-            likeBtn.tintColor = .white
         }
         
     }
@@ -165,7 +155,6 @@ class HomeTableViewCell: UITableViewCell {
     @objc func likeVideo(){
         if !liked {
             liked = true
-            likeBtn.tintColor = .red
         }
     }
     

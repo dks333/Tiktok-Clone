@@ -157,6 +157,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UITabl
             oldAndNewIndices.1 = indexPath.row
             currentIndex = indexPath.row
             cell.pause()
+            cell.animatePhotos()
         }
     }
     
