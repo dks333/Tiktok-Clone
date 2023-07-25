@@ -18,24 +18,23 @@
 
 #include <grpc/support/port_platform.h>
 
+#include <string>
+
+#include "absl/strings/str_cat.h"
+#include "absl/types/optional.h"
+
+#include <grpc/support/log.h>
+
+#include "src/core/lib/gprpp/env.h"
+#include "src/core/lib/security/credentials/credentials.h"
 #include "src/core/lib/security/credentials/google_default/google_default_credentials.h"
 
-#include <grpc/support/alloc.h>
-#include <grpc/support/log.h>
-#include <grpc/support/string_util.h>
-
-#include "src/core/lib/gpr/env.h"
-#include "src/core/lib/gpr/string.h"
-
-char* grpc_get_well_known_google_credentials_file_path_impl(void) {
-  char* result = nullptr;
-  char* base = gpr_getenv(GRPC_GOOGLE_CREDENTIALS_PATH_ENV_VAR);
-  if (base == nullptr) {
+std::string grpc_get_well_known_google_credentials_file_path_impl(void) {
+  auto base = grpc_core::GetEnv(GRPC_GOOGLE_CREDENTIALS_PATH_ENV_VAR);
+  if (!base.has_value()) {
     gpr_log(GPR_ERROR, "Could not get " GRPC_GOOGLE_CREDENTIALS_PATH_ENV_VAR
                        " environment variable.");
-    return nullptr;
+    return "";
   }
-  gpr_asprintf(&result, "%s/%s", base, GRPC_GOOGLE_CREDENTIALS_PATH_SUFFIX);
-  gpr_free(base);
-  return result;
+  return absl::StrCat(*base, "/", GRPC_GOOGLE_CREDENTIALS_PATH_SUFFIX);
 }

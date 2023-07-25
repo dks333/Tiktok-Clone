@@ -39,8 +39,8 @@ grpc_http2_error_code grpc_status_to_http2_error(grpc_status_code status) {
   }
 }
 
-grpc_status_code grpc_http2_error_to_grpc_status(grpc_http2_error_code error,
-                                                 grpc_millis deadline) {
+grpc_status_code grpc_http2_error_to_grpc_status(
+    grpc_http2_error_code error, grpc_core::Timestamp deadline) {
   switch (error) {
     case GRPC_HTTP2_NO_ERROR:
       /* should never be received */
@@ -48,7 +48,7 @@ grpc_status_code grpc_http2_error_to_grpc_status(grpc_http2_error_code error,
     case GRPC_HTTP2_CANCEL:
       /* http2 cancel translates to STATUS_CANCELLED iff deadline hasn't been
        * exceeded */
-      return grpc_core::ExecCtx::Get()->Now() > deadline
+      return grpc_core::Timestamp::Now() > deadline
                  ? GRPC_STATUS_DEADLINE_EXCEEDED
                  : GRPC_STATUS_CANCELLED;
     case GRPC_HTTP2_ENHANCE_YOUR_CALM:
@@ -68,29 +68,21 @@ grpc_status_code grpc_http2_status_to_grpc_status(int status) {
     case 200:
       return GRPC_STATUS_OK;
     case 400:
-      return GRPC_STATUS_INVALID_ARGUMENT;
+      return GRPC_STATUS_INTERNAL;
     case 401:
       return GRPC_STATUS_UNAUTHENTICATED;
     case 403:
       return GRPC_STATUS_PERMISSION_DENIED;
     case 404:
-      return GRPC_STATUS_NOT_FOUND;
-    case 409:
-      return GRPC_STATUS_ABORTED;
-    case 412:
-      return GRPC_STATUS_FAILED_PRECONDITION;
-    case 429:
-      return GRPC_STATUS_RESOURCE_EXHAUSTED;
-    case 499:
-      return GRPC_STATUS_CANCELLED;
-    case 500:
-      return GRPC_STATUS_UNKNOWN;
-    case 501:
       return GRPC_STATUS_UNIMPLEMENTED;
+    case 429:
+      return GRPC_STATUS_UNAVAILABLE;
+    case 502:
+      return GRPC_STATUS_UNAVAILABLE;
     case 503:
       return GRPC_STATUS_UNAVAILABLE;
     case 504:
-      return GRPC_STATUS_DEADLINE_EXCEEDED;
+      return GRPC_STATUS_UNAVAILABLE;
     /* everything else is unknown */
     default:
       return GRPC_STATUS_UNKNOWN;

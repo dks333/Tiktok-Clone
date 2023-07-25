@@ -21,21 +21,13 @@
 #if defined(GPR_POSIX_SYNC) && !defined(GPR_ABSEIL_SYNC) && \
     !defined(GPR_CUSTOM_SYNC)
 
+#include <errno.h>
+#include <time.h>
+
 #include <grpc/support/alloc.h>
 #include <grpc/support/log.h>
 #include <grpc/support/sync.h>
 #include <grpc/support/time.h>
-
-#include <errno.h>
-#include <time.h>
-
-#include "src/core/lib/profiling/timers.h"
-
-#ifdef GPR_LOW_LEVEL_COUNTERS
-gpr_atm gpr_mu_locks = 0;
-gpr_atm gpr_counter_atm_cas = 0;
-gpr_atm gpr_counter_atm_add = 0;
-#endif
 
 void gpr_mu_init(gpr_mu* mu) {
 #ifdef GRPC_ASAN_ENABLED
@@ -57,10 +49,6 @@ void gpr_mu_destroy(gpr_mu* mu) {
 }
 
 void gpr_mu_lock(gpr_mu* mu) {
-#ifdef GPR_LOW_LEVEL_COUNTERS
-  GPR_ATM_INC_COUNTER(gpr_mu_locks);
-#endif
-  GPR_TIMER_SCOPE("gpr_mu_lock", 0);
 #ifdef GRPC_ASAN_ENABLED
   GPR_ASSERT(pthread_mutex_lock(&mu->mutex) == 0);
 #else
@@ -69,7 +57,6 @@ void gpr_mu_lock(gpr_mu* mu) {
 }
 
 void gpr_mu_unlock(gpr_mu* mu) {
-  GPR_TIMER_SCOPE("gpr_mu_unlock", 0);
 #ifdef GRPC_ASAN_ENABLED
   GPR_ASSERT(pthread_mutex_unlock(&mu->mutex) == 0);
 #else
@@ -78,7 +65,6 @@ void gpr_mu_unlock(gpr_mu* mu) {
 }
 
 int gpr_mu_trylock(gpr_mu* mu) {
-  GPR_TIMER_SCOPE("gpr_mu_trylock", 0);
   int err = 0;
 #ifdef GRPC_ASAN_ENABLED
   err = pthread_mutex_trylock(&mu->mutex);
@@ -116,10 +102,6 @@ void gpr_cv_destroy(gpr_cv* cv) {
 #endif
 }
 
-#define gpr_convert_clock_type_debug(t, clock_type, now1, now2, add_result, \
-                                     sub_result)                            \
-  gpr_convert_clock_type((t), (clock_type))
-
 int gpr_cv_wait(gpr_cv* cv, gpr_mu* mu, gpr_timespec abs_deadline) {
   int err = 0;
   if (gpr_time_cmp(abs_deadline, gpr_inf_future(abs_deadline.clock_type)) ==
@@ -132,11 +114,10 @@ int gpr_cv_wait(gpr_cv* cv, gpr_mu* mu, gpr_timespec abs_deadline) {
   } else {
     struct timespec abs_deadline_ts;
 #if GPR_LINUX
-    abs_deadline = gpr_convert_clock_type_debug(
-        abs_deadline, GPR_CLOCK_MONOTONIC, now1, now2, add_result, sub_result);
+    abs_deadline = gpr_convert_clock_type(abs_deadline, GPR_CLOCK_MONOTONIC);
 #else
-    abs_deadline = gpr_convert_clock_type_debug(
-        abs_deadline, GPR_CLOCK_REALTIME, now1, now2, add_result, sub_result);
+    abs_deadline = gpr_convert_clock_type(abs_deadline, GPR_CLOCK_REALTIME);
+    abs_deadline = gpr_time_max(abs_deadline, gpr_now(abs_deadline.clock_type));
 #endif  // GPR_LINUX
     abs_deadline_ts.tv_sec = static_cast<time_t>(abs_deadline.tv_sec);
     abs_deadline_ts.tv_nsec = abs_deadline.tv_nsec;

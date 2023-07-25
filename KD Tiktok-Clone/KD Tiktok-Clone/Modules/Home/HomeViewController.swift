@@ -16,8 +16,8 @@ class HomeViewController: BaseViewController {
 
     // MARK: - UI Components
     var mainTableView: UITableView!
-    lazy var loadingAnimation: AnimationView = {
-        let animationView = AnimationView(name: "LoadingAnimation")
+    lazy var loadingAnimation: LottieAnimationView = {
+        let animationView = LottieAnimationView(name: "LoadingAnimation")
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.contentMode = .scaleAspectFill
         animationView.animationSpeed = 0.8

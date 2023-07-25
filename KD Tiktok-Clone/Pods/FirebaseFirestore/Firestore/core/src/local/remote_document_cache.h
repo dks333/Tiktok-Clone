@@ -17,7 +17,11 @@
 #ifndef FIRESTORE_CORE_SRC_LOCAL_REMOTE_DOCUMENT_CACHE_H_
 #define FIRESTORE_CORE_SRC_LOCAL_REMOTE_DOCUMENT_CACHE_H_
 
+#include <string>
+
+#include "Firestore/core/src/model/document_key.h"
 #include "Firestore/core/src/model/model_fwd.h"
+#include "Firestore/core/src/model/overlay.h"
 
 namespace firebase {
 namespace firestore {
@@ -27,6 +31,8 @@ class Query;
 }  // namespace core
 
 namespace local {
+
+class IndexManager;
 
 /**
  * Represents cached documents received from the remote backend.
@@ -49,7 +55,7 @@ class RemoteDocumentCache {
    * @param document A Document or DeletedDocument to put in the cache.
    * @param read_time The time at which the document was read or committed.
    */
-  virtual void Add(const model::MaybeDocument& document,
+  virtual void Add(const model::MutableDocument& document,
                    const model::SnapshotVersion& read_time) = 0;
 
   /** Removes the cached entry for the given key (no-op if no entry exists). */
@@ -62,8 +68,7 @@ class RemoteDocumentCache {
    * @return The cached Document or DeletedDocument entry, or nullopt if we
    * have nothing cached.
    */
-  virtual absl::optional<model::MaybeDocument> Get(
-      const model::DocumentKey& key) = 0;
+  virtual model::MutableDocument Get(const model::DocumentKey& key) const = 0;
 
   /**
    * Looks up a set of entries in the cache.
@@ -72,8 +77,22 @@ class RemoteDocumentCache {
    * @return The cached Document or NoDocument entries indexed by key. If an
    * entry is not cached, the corresponding key will be mapped to a null value.
    */
-  virtual model::OptionalMaybeDocumentMap GetAll(
-      const model::DocumentKeySet& keys) = 0;
+  virtual model::MutableDocumentMap GetAll(
+      const model::DocumentKeySet& keys) const = 0;
+
+  /**
+   * Looks up the next "limit" number of documents for a collection group based
+   * on the provided offset. The ordering is based on the document's read time
+   * and key.
+   *
+   * @param collection_group The collection group to scan.
+   * @param offset The offset to start the scan at.
+   * @param limit The maximum number of results to return.
+   * @return A newly created map with next set of documents.
+   */
+  virtual model::MutableDocumentMap GetAll(const std::string& collection_group,
+                                           const model::IndexOffset& offset,
+                                           size_t limit) const = 0;
 
   /**
    * Executes a query against the cached Document entries
@@ -84,13 +103,26 @@ class RemoteDocumentCache {
    * Cached DeletedDocument entries have no bearing on query results.
    *
    * @param query The query to match documents against.
-   * @param since_read_time If not set to SnapshotVersion::None(), return only
-   * documents that have been read since this snapshot version (exclusive).
+   * @param offset The read time and document key to start scanning at
+   * (exclusive).
+   * @param limit The maximum number of results to return.
+   * If the limit is not defined, returns all matching documents.
+   * @param mutated_docs The documents with local mutations, they are read
+   * regardless if the remote version matches the given query.
    * @return The set of matching documents.
    */
-  virtual model::DocumentMap GetMatching(
+  virtual model::MutableDocumentMap GetDocumentsMatchingQuery(
       const core::Query& query,
-      const model::SnapshotVersion& since_read_time) = 0;
+      const model::IndexOffset& offset,
+      absl::optional<size_t> limit = absl::nullopt,
+      const model::OverlayByDocumentKeyMap& mutated_docs = {}) const = 0;
+
+  /**
+   * Sets the index manager used by remote document cache.
+   *
+   * @param manager A pointer to an `IndexManager` owned by `Persistence`.
+   */
+  virtual void SetIndexManager(IndexManager* manager) = 0;
 };
 
 }  // namespace local
