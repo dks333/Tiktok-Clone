@@ -22,7 +22,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      - Continuous: Continuously scrolls left (with a pause at the original position if animationDelay is set).
      - ContinuousReverse: Continuously scrolls right (with a pause at the original position if animationDelay is set).
      */
-    public enum MarqueeType {
+    public enum MarqueeType: CaseIterable {
         case left
         case leftRight
         case right
@@ -89,8 +89,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      - SeeAlso: ScrollStep
      - SeeAlso: FadeStep
      */
-    open var scrollSequence: Array<MarqueeStep>?
-    
+    open var scrollSequence: [MarqueeStep]?
+
     /**
      Specifies the animation curve used in the scrolling motion of the labels.
      Allowable options:
@@ -154,6 +154,31 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     }
     
     /**
+     A boolean property that sets whether the `MarqueeLabel` should scroll, even if the specificed test string
+     can be fully contained within the label frame.
+     
+     If this property is set to `true`, the `MarqueeLabel` will automatically scroll regardless of text string
+     length, although this can still be overridden by the `tapToScroll` and `holdScrolling` properties.
+     
+     Defaults to `false`.
+     
+     - Warning: Forced scrolling may have unexpected edge cases or have unusual characteristics compared to the
+     'normal' scrolling feature.
+     
+     - SeeAlso: holdScrolling
+     - SeeAlso: tapToScroll
+     */
+    @IBInspectable public var forceScrolling: Bool = false {
+        didSet {
+            if forceScrolling != oldValue {
+                if !(awayFromHome || holdScrolling || tapToScroll ) && labelShouldScroll() {
+                    updateAndScroll()
+                }
+            }
+        }
+    }
+	
+    /**
      A boolean property that sets whether the `MarqueeLabel` should only begin a scroll when tapped.
      
      If this property is set to `true`, the `MarqueeLabel` will only begin a scroll animation cycle when tapped. The label will
@@ -202,6 +227,35 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
         
         return false
+    }
+    
+    /**
+     An optional CGFloat computed value that provides the current scroll animation position, as a value between
+     0.0 and 1.0. A value of 0.0 indicates the label is "at home" (`awayFromHome` will be false). A value
+     of 1.0 indicates the label is at the "away" position (and `awayFromHome` will be true).
+     
+     Will return nil when the label presentation layer is nil.
+     
+     - Note: For `leftRight` and `rightLeft` type labels this value will increase and reach 1.0 when the label animation reaches the
+     maximum displacement, as the left or right edge of the label (respectively) is shown. As the scroll reverses,
+     the value will decrease back to 0.0.
+     
+     - Note: For `continuous` and`continuousReverse` type labels, this value will increase from 0.0 and reach 1.0 just as the
+     label loops around and comes to a stop at the original home position. When that position is reached, the value will
+     jump from 1.0 directly to 0.0 and begin to increase from 0.0 again.
+     */
+    open var animationPosition: CGFloat? {
+        guard let presentationLayer = sublabel.layer.presentation() else {
+            return nil
+        }
+        
+        // No dividing by zero!
+        if awayOffset == 0.0 {
+            return 0.0
+        }
+        
+        let progressFraction = abs((presentationLayer.position.x - homeLabelFrame.origin.x) / awayOffset)
+        return progressFraction
     }
     
     /**
@@ -531,7 +585,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         // We don't care about these values, we just want to forward them on to our sublabel.
         let properties = ["baselineAdjustment", "enabled", "highlighted", "highlightedTextColor",
                           "minimumFontSize", "shadowOffset", "textAlignment",
-                          "userInteractionEnabled", "adjustsFontSizeToFitWidth",
+                          "userInteractionEnabled", "adjustsFontSizeToFitWidth", "minimumScaleFactor",
                           "lineBreakMode", "numberOfLines", "contentMode"]
         
         // Iterate through properties
@@ -583,7 +637,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
         
         // Calculate expected size
-        let expectedLabelSize = sublabelSize()
+        let expectedLabelSize = sublabel.desiredSize()
         
         // Invalidate intrinsic size
         invalidateIntrinsicContentSize()
@@ -597,6 +651,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             // Set text alignment and break mode to act like a normal label
             sublabel.textAlignment = super.textAlignment
             sublabel.lineBreakMode = super.lineBreakMode
+            sublabel.adjustsFontSizeToFitWidth = super.adjustsFontSizeToFitWidth
+            sublabel.minimumScaleFactor = super.minimumScaleFactor
             
             let labelFrame: CGRect
             switch type {
@@ -609,9 +665,9 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             homeLabelFrame = labelFrame
             awayOffset = 0.0
             
-            // Remove an additional sublabels (for continuous types)
-            repliLayer?.instanceCount = 1;
-            
+            // Remove any additional sublabels (for continuous types)
+            repliLayer?.instanceCount = 1
+
             // Set the sublabel frame to calculated labelFrame
             sublabel.frame = labelFrame
             
@@ -623,15 +679,19 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         
         // Label DOES need to scroll
         
+        // Reset font scaling to off for scrolling
+        sublabel.adjustsFontSizeToFitWidth = false
+        sublabel.minimumScaleFactor = 0.0
+        
         // Spacing between primary and second sublabel must be at least equal to leadingBuffer, and at least equal to the fadeLength
-        let minTrailing = max(max(leadingBuffer, trailingBuffer), fadeLength)
+        let minTrailing = minimumTrailingDistance
         
         // Determine positions and generate scroll steps
         let sequence: [MarqueeStep]
         
         switch type {
         case .continuous, .continuousReverse:
-            if (type == .continuous) {
+            if type == .continuous {
                 homeLabelFrame = CGRect(x: leadingBuffer, y: 0.0, width: expectedLabelSize.width, height: bounds.size.height).integral
                 awayOffset = -(homeLabelFrame.size.width + minTrailing)
             } else { // .ContinuousReverse
@@ -661,11 +721,14 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             sublabel.frame = homeLabelFrame
             
             // Configure replication
-            repliLayer?.instanceCount = 2
+            // Determine replication count required
+            let fitFactor: CGFloat = bounds.size.width/(expectedLabelSize.width + leadingBuffer)
+            let repliCount = 1 + Int(ceil(fitFactor))
+            repliLayer?.instanceCount = repliCount
             repliLayer?.instanceTransform = CATransform3DMakeTranslation(-awayOffset, 0.0, 0.0)
             
         case .leftRight, .left, .rightLeft, .right:
-            if (type == .leftRight || type == .left) {
+            if type == .leftRight || type == .left {
                 homeLabelFrame = CGRect(x: leadingBuffer, y: 0.0, width: expectedLabelSize.width, height: bounds.size.height).integral
                 awayOffset = bounds.size.width - (expectedLabelSize.width + leadingBuffer + trailingBuffer)
                 // Enforce text alignment for this type
@@ -681,8 +744,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             
             // Remove any replication
             repliLayer?.instanceCount = 1
-            
-            if (type == .leftRight || type == .rightLeft) {
+
+            if type == .leftRight || type == .rightLeft {
                 sequence = scrollSequence ?? [
                     ScrollStep(timeStep: 0.0, position: .home, edgeFades: .trailing),               // Starting point, at home, with trailing fade
                     ScrollStep(timeStep: animationDelay, position: .home, edgeFades: .trailing),    // Delay at home, maintaining fade state
@@ -719,29 +782,23 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
     }
     
-    private func sublabelSize() -> CGSize {
-        // Bound the expected size
-        let maximumLabelSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        // Calculate the expected size
-        var expectedLabelSize = sublabel.sizeThatFits(maximumLabelSize)
-        
-        #if os(tvOS)
-            // Sanitize width to 16384.0 (largest width a UILabel will draw on tvOS)
-            expectedLabelSize.width = min(expectedLabelSize.width, 16384.0)
-        #else
-            // Sanitize width to 5461.0 (largest width a UILabel will draw on an iPhone 6S Plus)
-            expectedLabelSize.width = min(expectedLabelSize.width, 5461.0)
-        #endif
-
-        // Adjust to own height (make text baseline match normal label)
-        expectedLabelSize.height = bounds.size.height
-        return expectedLabelSize
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+        return sizeThatFits(size, withBuffers: true)
     }
     
-    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+    open func sizeThatFits(_ size: CGSize, withBuffers: Bool) -> CGSize {
         var fitSize = sublabel.sizeThatFits(size)
-        fitSize.width += leadingBuffer
+        if withBuffers {
+            fitSize.width += leadingBuffer
+        }
         return fitSize
+    }
+    
+    /**
+     Returns the unconstrained size of the specified label text (for a single line).
+    */
+    open func textLayoutSize() -> CGSize {
+        return sublabel.desiredSize()
     }
     
     //
@@ -750,19 +807,50 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     
     open func labelShouldScroll() -> Bool {
         // Check for nil string
-        if sublabel.text == nil {
+        guard sublabel.text != nil else {
             return false
         }
         
         // Check for empty string
-        if sublabel.text!.isEmpty {
+        guard !sublabel.text!.isEmpty else {
             return false
         }
         
-        // Check if the label string fits
-        let labelTooLarge = (sublabelSize().width + leadingBuffer) > self.bounds.size.width + CGFloat.ulpOfOne
+        var labelTooLarge = false
+        if !super.adjustsFontSizeToFitWidth {
+            // Usual logic to check if the label string fits
+            labelTooLarge = (sublabel.desiredSize().width + leadingBuffer) > self.bounds.size.width + CGFloat.ulpOfOne
+        } else {
+            // Logic with auto-scale support
+            // Create mutable attributed string to modify font sizes in-situ
+            let resizedString = NSMutableAttributedString.init(attributedString: sublabel.attributedText!)
+            resizedString.beginEditing()
+            // Enumerate all font attributes of attributed string
+            resizedString.enumerateAttribute(.font, in: NSRange(0..<sublabel.attributedText!.length)) { val, rng, stop in
+                if let originalFont = val as? UIFont {
+                    // Calculate minimum-factor font size
+                    let resizedFontSize = originalFont.pointSize * super.minimumScaleFactor
+                    // Create and apply new font attribute to string
+                    if let resizedFont = UIFont.init(name: originalFont.fontName, size: resizedFontSize) {
+                        resizedString.addAttribute(.font, value: resizedFont, range: rng)
+                    }
+                }
+            }
+            resizedString.endEditing()
+            
+            // Get new expected minimum size
+            let expectedMinimumTextSize = resizedString.size()
+            
+            // If even after shrinking it's too wide, consider the label too large and in need of scrolling
+            labelTooLarge = self.bounds.size.width < ceil(expectedMinimumTextSize.width) + CGFloat.ulpOfOne
+            
+            // Set scale factor on sublabel dependent on result, back to 1.0 if too big to prevent
+            // sublabel from shrinking AND scrolling
+            sublabel.minimumScaleFactor = labelTooLarge ? 1.0 : super.minimumScaleFactor
+        }
+
         let animationHasDuration = speed.value > 0.0
-        return (!labelize && labelTooLarge && animationHasDuration)
+        return (!labelize && (forceScrolling || labelTooLarge) && animationHasDuration)
     }
     
     private func labelReadyForScroll() -> Bool {
@@ -788,11 +876,20 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     }
     
     private func returnLabelToHome() {
+        // Store if label is away from home at time of call
+        let away = awayFromHome
+        
         // Remove any gradient animation
         maskLayer?.removeAllAnimations()
         
         // Remove all sublabel position animations
         sublabel.layer.removeAllAnimations()
+        
+        // Fire completion block if appropriate
+        if away {
+            // If label was away when this was called, animation did NOT finish
+            scrollCompletionBlock?(!away)
+        }
         
         // Remove completion block
         scrollCompletionBlock = nil
@@ -845,11 +942,11 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
                 fader = nil
             }
         #else
-            fader = nil;
+            fader = nil
         #endif
-        
-        scrollCompletionBlock = { [weak self] (finished: Bool) -> () in
-            guard (self != nil) else {
+
+        scrollCompletionBlock = { [weak self] (finished: Bool) in
+            guard self != nil else {
                 return
             }
             
@@ -868,19 +965,19 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             guard self!.sublabel.layer.animation(forKey: "position") == nil else {
                 return
             }
-            // 3) We don't not start automatically if the animation was unexpectedly interrupted
+            // 3) We don't start automatically if the animation was unexpectedly interrupted
             guard finished else {
                 // Do not continue into the next loop
                 return
             }
             // 4) A completion block still exists for the NEXT loop. A notable case here is if
             // returnLabelToHome() was called during a subclass's labelReturnToHome() function
-            guard (self!.scrollCompletionBlock != nil) else {
+            guard self!.scrollCompletionBlock != nil else {
                 return
             }
             
             // Begin again, if conditions met
-            if (self!.labelShouldScroll() && !self!.tapToScroll && !self!.holdScrolling) {
+            if self!.labelShouldScroll() && !self!.tapToScroll && !self!.holdScrolling {
                 // Perform completion callback
                 self!.scroll(scroller, fader: fader)
             }
@@ -977,7 +1074,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         
         for (offset, step) in fadeSteps {
             // Fade times
-            if (step is ScrollStep) {
+            if step is ScrollStep {
                 totalTime += step.timeStep
                 stepTime = totalTime
             } else {
@@ -1015,8 +1112,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         animation.values = fadeKeyValues
         animation.keyTimes = fadeKeyTimes
         animation.timingFunctions = fadeTimingFunctions
-        
-        return (anim: animation, duration: max(totalTime,totalDuration))
+
+        return (anim: animation, duration: max(totalTime, totalDuration))
     }
     
     private func applyGradientMask(_ fadeLength: CGFloat, animated: Bool, firstStep: MarqueeStep? = nil) {
@@ -1024,7 +1121,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         maskLayer?.removeAllAnimations()
         
         // Check for zero-length fade
-        if (fadeLength <= 0.0) {
+        if fadeLength <= 0.0 {
             removeGradientMask()
             return
         }
@@ -1068,8 +1165,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         // Determine colors for non-scrolling label (i.e. at home)
         let adjustedColors: [CGColor]
         let trailingFadeNeeded = self.labelShouldScroll()
-        
-        switch (type) {
+
+        switch type {
         case .continuousReverse, .rightLeft:
             adjustedColors = [(trailingFadeNeeded ? transparent : opaque), opaque, opaque, opaque]
         
@@ -1083,7 +1180,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             gradientMask.colors = adjustedColors
             CATransaction.commit()
         #else
-            if (animated) {
+            if animated {
                 // Finish transaction
                 CATransaction.commit()
                 
@@ -1124,7 +1221,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     }
     
     private func transactionDurationType(_ labelType: MarqueeType, interval: CGFloat, delay: CGFloat) -> TimeInterval {
-        switch (labelType) {
+        switch labelType {
         case .leftRight, .rightLeft:
             return TimeInterval(2.0 * (delay + interval))
         default:
@@ -1174,9 +1271,14 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         
         // Draw only background color
         if let bgColor = backgroundColor {
-            ctx.setFillColor(bgColor.cgColor);
-            ctx.fill(layer.bounds);
+            ctx.setFillColor(bgColor.cgColor)
+            ctx.fill(layer.bounds)
         }
+    }
+    
+    private var minimumTrailingDistance: CGFloat {
+        // Spacing between primary and second sublabel must be at least equal to leadingBuffer, and at least equal to the fadeLengt
+        return max(max(leadingBuffer, trailingBuffer), fadeLength)
     }
     
     fileprivate enum MarqueeKeys: String {
@@ -1235,7 +1337,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     */
     public func triggerScrollStart() {
         if labelShouldScroll() && !awayFromHome {
-            updateAndScroll()
+            updateAndScroll(overrideHold: true)
         }
     }
     
@@ -1297,7 +1399,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      */
     public func pauseLabel() {
         // Prevent pausing label while not in scrolling animation, or when already paused
-        guard (!isPaused && awayFromHome) else {
+        guard !isPaused && awayFromHome else {
             return
         }
         
@@ -1319,7 +1421,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      */
     public func unpauseLabel() {
         // Only unpause if label was previously paused
-        guard (isPaused) else {
+        guard isPaused else {
             return
         }
         
@@ -1343,6 +1445,58 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             // Set shouldBeginScroll to true to begin single scroll due to tap
             updateAndScroll(overrideHold: true)
         }
+    }
+    
+    /**
+     Function to convert a point from the label view frame coordinates to "text" coordinates, i.e. the equivalent
+     position in the (possibly) scrolling label. For example, it can be used to convert the coordinates
+     of a tap point on the MarqueeLabel view into that of the scrolling label, in order to determine the
+     word or character under the tap point.
+     
+     If the specified point does not fall inside the bounds of the scrolling label, such as if on a leading
+     or trailing buffer area, the function will return nil.
+     */
+    open func textCoordinateForFramePoint(_ point:CGPoint) -> CGPoint? {
+        // Check for presentation layer, if none return input point
+        guard let presentationLayer = sublabel.layer.presentation() else { return point }
+        // Convert point from MarqueeLabel main layer to sublabel's presentationLayer
+        let presentationPoint = presentationLayer.convert(point, from: self.layer)
+        // Check if point overlaps into 2nd instance of a continuous type label
+        let textPoint: CGPoint?
+        let presentationX = presentationPoint.x
+        let labelWidth = sublabel.frame.size.width
+        
+        var containers: [Range<CGFloat>] = []
+        switch type {
+        case .continuous:
+            // First label frame range
+            let firstLabel = 0.0 ..< sublabel.frame.size.width
+            // Range from end of first label to the minimum trailining distance (i.e. the separator)
+            let minTrailing = firstLabel.rangeForExtension(minimumTrailingDistance)
+            // Range of second label instance, from end of separator to length
+            let secondLabel = minTrailing.rangeForExtension(labelWidth)
+            // Add valid ranges to array to check
+            containers += [firstLabel, secondLabel]
+        case .continuousReverse:
+            // First label frame range
+            let firstLabel = 0.0 ..< sublabel.frame.size.width
+            // Range of second label instance, from end of separator to length
+            let secondLabel = -sublabel.frame.size.width ..< -minimumTrailingDistance
+            // Add valid ranges to array to check
+            containers += [firstLabel, secondLabel]
+        case .left, .leftRight, .right, .rightLeft:
+            // Only label frame range
+            let firstLabel = 0.0 ..< sublabel.frame.size.width
+            containers.append(firstLabel)
+        }
+        
+        // Determine which range contains the point, or return nil if in a buffer/margin area
+        guard let container = containers.filter({ (rng) -> Bool in
+            return rng.contains(presentationX)
+        }).first else { return nil }
+            
+        textPoint = CGPoint(x: (presentationX - container.lowerBound), y: presentationPoint.y)
+        return textPoint
     }
     
     /**
@@ -1519,27 +1673,6 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         set {
             // By the nature of MarqueeLabel, this is 1
             super.numberOfLines = 1
-        }
-    }
-    
-    override open var adjustsFontSizeToFitWidth: Bool {
-        get {
-            return super.adjustsFontSizeToFitWidth
-        }
-        
-        set {
-            // By the nature of MarqueeLabel, this is false
-            super.adjustsFontSizeToFitWidth = false
-        }
-    }
-    
-    override open var minimumScaleFactor: CGFloat {
-        get {
-            return super.minimumScaleFactor
-        }
-        
-        set {
-            super.minimumScaleFactor = 0.0
         }
     }
     
@@ -1725,21 +1858,48 @@ public struct FadeStep: MarqueeStep {
     }
 }
 
-public struct EdgeFade : OptionSet {
+public struct EdgeFade: OptionSet {
     public let rawValue: Int
-    public static let leading  = EdgeFade(rawValue: 1 << 0)
+    public static let leading = EdgeFade(rawValue: 1 << 0)
     public static let trailing = EdgeFade(rawValue: 1 << 1)
-    
+
     public init(rawValue: Int) {
-        self.rawValue = rawValue;
+        self.rawValue = rawValue
     }
 }
 
 // Define helpful typealiases
-fileprivate typealias MLAnimationCompletionBlock = (_ finished: Bool) -> ()
+fileprivate typealias MLAnimationCompletionBlock = (_ finished: Bool) -> Void
 fileprivate typealias MLAnimation = (anim: CAKeyframeAnimation, duration: CGFloat)
 
 fileprivate class GradientSetupAnimation: CABasicAnimation {
+}
+
+fileprivate extension UILabel {
+    func desiredSize() -> CGSize {
+        // Bound the expected size
+        let maximumLabelSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        // Calculate the expected size
+        var expectedLabelSize = self.sizeThatFits(maximumLabelSize)
+        
+        #if os(tvOS)
+            // Sanitize width to 16384.0 (largest width a UILabel will draw on tvOS)
+            expectedLabelSize.width = min(expectedLabelSize.width, 16384.0)
+        #else
+            // Sanitize width to 5461.0 (largest width a UILabel will draw on an iPhone 6S Plus)
+            expectedLabelSize.width = min(expectedLabelSize.width, 5461.0)
+        #endif
+
+        // Adjust to own height (make text baseline match normal label)
+        expectedLabelSize.height = bounds.size.height
+        return expectedLabelSize
+    }
+}
+
+fileprivate extension Range where Bound == CGFloat {
+    func rangeForExtension(_ ext: CGFloat) -> Range {
+        return self.upperBound..<(self.upperBound + ext)
+    }
 }
 
 fileprivate extension UIResponder {
@@ -1796,14 +1956,14 @@ fileprivate extension CAMediaTimingFunction {
             // Calculate f(t0)
             f0 = YforCurveAt(t0, controlPoints:controlPoints) - y_0
             // Check if this is close (enough)
-            if (abs(f0) < epsilon) {
+            if abs(f0) < epsilon {
                 // Done!
                 return t0
             }
             // Else continue Newton's Method
             df0 = derivativeCurveYValueAt(t0, controlPoints:controlPoints)
             // Check if derivative is small or zero ( http://en.wikipedia.org/wiki/Newton's_method#Failure_analysis )
-            if (abs(df0) < 1e-6) {
+            if abs(df0) < 1e-6 {
                 break
             }
             // Else recalculate t1
@@ -1814,15 +1974,15 @@ fileprivate extension CAMediaTimingFunction {
         print("MarqueeLabel: Failed to find t for Y input!")
         return t0
     }
-    
-    func YforCurveAt(_ t: CGFloat, controlPoints:[CGPoint]) -> CGFloat {
+
+    func YforCurveAt(_ t: CGFloat, controlPoints: [CGPoint]) -> CGFloat {
         let P0 = controlPoints[0]
         let P1 = controlPoints[1]
         let P2 = controlPoints[2]
         let P3 = controlPoints[3]
         
         // Per http://en.wikipedia.org/wiki/Bezier_curve#Cubic_B.C3.A9zier_curves
-        let y0 = (pow((1.0 - t),3.0) * P0.y)
+        let y0 = (pow((1.0 - t), 3.0) * P0.y)
         let y1 = (3.0 * pow(1.0 - t, 2.0) * t * P1.y)
         let y2 = (3.0 * (1.0 - t) * pow(t, 2.0) * P2.y)
         let y3 = (pow(t, 3.0) * P3.y)
@@ -1837,8 +1997,8 @@ fileprivate extension CAMediaTimingFunction {
         let P3 = controlPoints[3]
         
         // Per http://en.wikipedia.org/wiki/Bezier_curve#Cubic_B.C3.A9zier_curves
-        
-        let x0 = (pow((1.0 - t),3.0) * P0.x)
+
+        let x0 = (pow((1.0 - t), 3.0) * P0.x)
         let x1 = (3.0 * pow(1.0 - t, 2.0) * t * P1.x)
         let x2 = (3.0 * (1.0 - t) * pow(t, 2.0) * P2.x)
         let x3 = (pow(t, 3.0) * P3.x)

@@ -19,6 +19,8 @@
 #ifndef GRPC_IMPL_CODEGEN_ATM_GCC_SYNC_H
 #define GRPC_IMPL_CODEGEN_ATM_GCC_SYNC_H
 
+// IWYU pragma: private, include <grpc/support/atm.h>
+
 /* variant of atm_platform.h for gcc and gcc-like compiers with __sync_*
    interface */
 #include <grpc/impl/codegen/port_platform.h>
@@ -26,8 +28,6 @@
 typedef intptr_t gpr_atm;
 #define GPR_ATM_MAX INTPTR_MAX
 #define GPR_ATM_MIN INTPTR_MIN
-#define GPR_ATM_INC_CAS_THEN(blah) blah
-#define GPR_ATM_INC_ADD_THEN(blah) blah
 
 #define GPR_ATM_COMPILE_BARRIER_() __asm__ __volatile__("" : : : "memory")
 

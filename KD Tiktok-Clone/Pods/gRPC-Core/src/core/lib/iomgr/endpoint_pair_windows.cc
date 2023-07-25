@@ -21,15 +21,15 @@
 #include "src/core/lib/iomgr/port.h"
 
 #ifdef GRPC_WINSOCK_SOCKET
-#include "src/core/lib/iomgr/endpoint_pair.h"
-#include "src/core/lib/iomgr/sockaddr.h"
-#include "src/core/lib/iomgr/sockaddr_utils.h"
-
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 
 #include <grpc/support/log.h>
+
+#include "src/core/lib/address_utils/sockaddr_utils.h"
+#include "src/core/lib/iomgr/endpoint_pair.h"
+#include "src/core/lib/iomgr/sockaddr.h"
 #include "src/core/lib/iomgr/socket_windows.h"
 #include "src/core/lib/iomgr/tcp_windows.h"
 
@@ -71,16 +71,15 @@ static void create_sockets(SOCKET sv[2]) {
 }
 
 grpc_endpoint_pair grpc_iomgr_create_endpoint_pair(
-    const char* name, grpc_channel_args* channel_args) {
+    const char*, grpc_channel_args* channel_args) {
   SOCKET sv[2];
   grpc_endpoint_pair p;
   create_sockets(sv);
   grpc_core::ExecCtx exec_ctx;
   p.client = grpc_tcp_create(grpc_winsocket_create(sv[1], "endpoint:client"),
-                             channel_args, "endpoint:server");
+                             "endpoint:server");
   p.server = grpc_tcp_create(grpc_winsocket_create(sv[0], "endpoint:server"),
-                             channel_args, "endpoint:client");
-
+                             "endpoint:client");
   return p;
 }
 

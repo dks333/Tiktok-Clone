@@ -21,6 +21,7 @@
 #include "src/core/lib/debug/trace.h"
 
 #include <string.h>
+
 #include <type_traits>
 
 #include <grpc/grpc.h>
@@ -146,8 +147,6 @@ void grpc_tracer_init() {
   grpc_core::UniquePtr<char> value = GPR_GLOBAL_CONFIG_GET(grpc_trace);
   parse(value.get());
 }
-
-void grpc_tracer_shutdown(void) {}
 
 int grpc_tracer_set_enabled(const char* name, int enabled) {
   return grpc_core::TraceFlagList::Set(name, enabled != 0);
